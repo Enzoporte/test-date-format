@@ -1,4 +1,6 @@
-﻿namespace TestDateFormat;
+﻿using System.Collections;
+
+namespace TestDateFormat;
 
 /// <summary>
 /// Esta clase implementa la funcionalidad de cambiar el formato de una fecha.
@@ -15,10 +17,21 @@ public class DateFormatter
     /// <returns>La fecha convertida al formato "yyyy-mm-dd".</returns>
     public static string ChangeFormat(string date)
     {
-        if (string.IsNullOrEmpty(date))
+        
+        if ((string.IsNullOrEmpty(date)) || (date.Length != 10))
         {
-            return "";
+            return "ERROR - Fecha Invalida";
         }
-        return date.Substring(6) + "-" + date.Substring(3, 2) + "-" + date.Substring(0, 2);
+        try
+        {
+            String[] dateArray = date.Split("/");
+            return dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
+        }
+        catch (System.Exception)
+        {
+            
+            return "ERROR - Fecha mal escrita";
+        }
+
     }
 }
